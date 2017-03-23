@@ -1,0 +1,32 @@
+
+<h2>Welcome to Messages App</h2>
+
+<br>
+<h3>Login</h3>
+
+<table>
+  <form action="/login" method="post">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    Name: <input type="text" name="name" placeholder="enter name">
+    Password: <input type="password" name="password" placeholder="enter password">
+    <input type="submit" value="login">
+  </form>
+</table>
+
+<% if flash[:message] %>
+  <br>
+  <% flash[:message].each do |msg| %>
+    <p><h3><i><%=msg%></h3></i></p>
+  <%end%>
+<%end%>
+
+<br>
+
+<h3>Register</h3>
+<form action="/register" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  Name: <input type="text" name="name" placeholder="enter name">
+  Password: <input type="password" name="password" placeholder="enter password">
+  <input type="submit" value="register">
+
+</form>

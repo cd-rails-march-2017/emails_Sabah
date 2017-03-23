@@ -1,0 +1,68 @@
+<h2>messages</h2>
+
+Welcome <%= @user.name %>,
+
+<br>
+<h4>inbox</h4>
+  <div style="margin-left: 10px;">
+    <% @inbox.each do |msg| %>
+
+      <p>From: <%= msg.sender.name %> -- <%= msg.created_at%>
+      <br>
+      "<%=msg.message%>"
+      </p>
+
+    <%end%>
+  </div>
+
+<h4>outbox</h4>
+<div style="margin-left: 10px;">
+
+  <% @outbox.each do |msg| %>
+  <p>To: <%= msg.recipient.name %> -- <%= msg.created_at%>
+    <br>
+    "<%=msg.message%>"
+  </p>
+  <%end%>
+
+</div>
+
+<h4>contacts</h4>
+
+<div style="margin-left: 10px;">
+<% @contacts.map(&:recipient).uniq.each do |msg| %>
+<p>
+  <%=msg.name%>
+</p>
+<%end%>
+</div>
+
+
+<h4>new message</h4>
+
+<% if flash[:message] %>
+  <br>
+  <% flash[:message].each do |msg| %>
+    <p><h3><i><%=msg%></h3></i></p>
+  <%end%>
+  <br>
+<%end%>
+
+<form action="/message" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  to:
+    <select name='recipient'>
+      <option value=""> </option>
+      <% @users.each do |user| %>
+      <option value="<%=user.id%>"><%= user.name %></option>
+      <% end %>
+    </select>
+  <br><br>
+  Message:
+  <br>
+  <textarea name="message" placeholder="enter message"></textarea>
+  <br>
+  <input type="submit" value="send">
+</form>
+<br><br>
+<a href="/logout"><button>logout</button></a>
