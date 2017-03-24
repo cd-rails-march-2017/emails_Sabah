@@ -30,10 +30,8 @@ Welcome <%= @user.name %>,
 <h4>contacts</h4>
 
 <div style="margin-left: 10px;">
-<% @contacts.map(&:recipient).uniq.each do |msg| %>
-<p>
-  <%=msg.name%>
-</p>
+<% @contacts.each do |contact| %>
+  <p><%=contact.name %></p>
 <%end%>
 </div>
 
@@ -66,3 +64,13 @@ Welcome <%= @user.name %>,
 </form>
 <br><br>
 <a href="/logout"><button>logout</button></a>
+
+
+
+
+
+
+
+
+
+<!-->
